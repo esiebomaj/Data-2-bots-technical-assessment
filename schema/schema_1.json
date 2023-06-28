@@ -3,7 +3,7 @@
     "tag": "",
     "description": "",
     "required": false,
-    "type": {
+    "properties": {
       "id": {
         "tag": "",
         "description": "",
@@ -26,7 +26,7 @@
         "tag": "",
         "description": "",
         "required": false,
-        "type": {
+        "properties": {
           "minParticipants": {
             "tag": "",
             "description": "",
@@ -67,7 +67,7 @@
             "tag": "",
             "description": "",
             "required": false,
-            "type": {
+            "properties": {
               "name": {
                 "tag": "",
                 "description": "",
@@ -80,9 +80,11 @@
                 "required": false,
                 "type": "string"
               }
-            }
+            },
+            "type": "object"
           }
-        }
+        },
+        "type": "object"
       },
       "status": {
         "tag": "",
@@ -112,7 +114,7 @@
         "tag": "",
         "description": "",
         "required": false,
-        "type": {
+        "properties": {
           "id": {
             "tag": "",
             "description": "",
@@ -149,7 +151,8 @@
             "required": false,
             "type": "string"
           }
-        }
+        },
+        "type": "object"
       },
       "participants": {
         "tag": "",
@@ -157,13 +160,14 @@
         "required": false,
         "type": "list"
       }
-    }
+    },
+    "type": "object"
   },
   "joiner": {
     "tag": "",
     "description": "",
     "required": false,
-    "type": {
+    "properties": {
       "id": {
         "tag": "",
         "description": "",
@@ -200,12 +204,13 @@
         "required": false,
         "type": "string"
       }
-    }
+    },
+    "type": "object"
   },
   "participantIds": {
     "tag": "",
     "description": "",
     "required": false,
-    "type": "list"
+    "type": "enum"
   }
 }

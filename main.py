@@ -1,7 +1,9 @@
 import os
-import sys
 import json
-import pprint
+
+
+PATH_TO_INPUT = "./data"
+PATH_TO_OUTPUT = "./schema"
 
 
 def extract_schema(json_obj):
@@ -22,7 +24,8 @@ def extract_schema(json_obj):
             if obj_type == dict:
                 # if its a nexted object we call this fuction recursivey
                 s = extract_schema(json_obj[key])
-                sub_schema["type"] = s
+                sub_schema["properties"] = s
+                sub_schema["type"] = "object"
                 pass
 
             elif obj_type == str:
@@ -34,11 +37,13 @@ def extract_schema(json_obj):
                 pass
 
             elif obj_type == list:
-                sub_schema["type"] = "list"
-                pass
+                if len(json_obj[key]) > 0 and type(json_obj[key][0]) == str:
+                    sub_schema["type"] = "enum"
+                else:
+                    sub_schema["type"] = "array"
 
             elif obj_type == bool:
-                sub_schema["type"] = "boolean"
+                sub_schema["type"] = "bool"
                 pass
 
             schema[key] = sub_schema
@@ -51,19 +56,20 @@ def dump_schema_output(schema, path):
         json.dump(schema, file)
 
 
-def main():
-    files = os.scandir("./data")
+def snif_schema(input_path, output_dir):
+    files = os.scandir(input_path)
     for file in files:
         # ensure that its a json files
         if file.is_file and ".json" in file.path:
             path = file.path.replace("\\", "/")
 
             with open(path, "r") as file:
-                json_obj = json.load(file)["message"]
+                json_obj = json.load(file).get("message")
                 schema = extract_schema(json_obj)
-                output_path = path.replace("data", "schema")
+                output_file_name = path.split("/")[-1].replace("data", "schema")
+                output_path = os.path.join(output_dir, output_file_name)
                 dump_schema_output(schema, output_path)
 
 
 if __name__ == "__main__":
-    main()
+    snif_schema(PATH_TO_INPUT, PATH_TO_OUTPUT)
