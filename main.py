@@ -77,7 +77,9 @@ def snif_schema(input_dir: str, output_dir: str) -> None:
 
             with open(path, "r") as file:
                 json_obj = json.load(file).get("message")
+
                 schema = extract_schema(json_obj)
+
                 output_file_name = path.split("/")[-1].replace("data", "schema")
                 output_path = os.path.join(output_dir, output_file_name)
                 dump_schema_output(schema, output_path)
