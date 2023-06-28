@@ -6,7 +6,11 @@ PATH_TO_INPUT = "./data"
 PATH_TO_OUTPUT = "./schema"
 
 
-def extract_schema(json_obj):
+def extract_schema(json_obj: dict) -> dict:
+    """
+    takes a json_obj in for of a python dictionary and returns its schema
+    """
+
     schema = {}
 
     for key in json_obj:
@@ -51,13 +55,21 @@ def extract_schema(json_obj):
     return schema
 
 
-def dump_schema_output(schema, path):
+def dump_schema_output(schema: dict, path: str) -> None:
+    """
+    dumps the schema into an output json file
+    """
     with open(path, "w") as file:
         json.dump(schema, file)
 
 
-def snif_schema(input_path, output_dir):
-    files = os.scandir(input_path)
+def snif_schema(input_dir: str, output_dir: str) -> None:
+    """
+    reads the json data from `input_dir` snifs its schema 
+    and stores the result in `output_dir` directory
+    """
+
+    files = os.scandir(input_dir)
     for file in files:
         # ensure that its a json files
         if file.is_file and ".json" in file.path:

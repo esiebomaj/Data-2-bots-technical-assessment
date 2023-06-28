@@ -2,9 +2,10 @@
 
 ## Setup
 
-1. create new virtual enviroment `virtualenv venv`
-2. Activate the virtual enviroment `./venv/scripts/activate` for windows and `source ./venv/bin/activate` for linux based os
-3. install requirements `pip install -r requirements.txt`
+1. Clone this repo locally
+2. create new virtual enviroment `virtualenv venv`
+3. Activate the virtual enviroment `./venv/scripts/activate` for windows and `source ./venv/bin/activate` for linux based os
+4. install requirements `pip install -r requirements.txt`
 
 ## Running test
 
